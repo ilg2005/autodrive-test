@@ -8,7 +8,7 @@ import ButtonPopupClose from '@/components/ButtonPopupClose.vue'
     <div class="bg-white rounded-lg p-8">
       <div class="flex justify-between mb-4">
 
-        <h2 class="text-xl font-bold">Отправлено</h2>
+        <h2 class="text-xl font-bold">Результат: </h2>
         <ButtonPopupClose />
       </div>
       <div v-html="store.getters.getResult"></div>

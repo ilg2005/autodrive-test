@@ -19,15 +19,6 @@ onBeforeMount(() => {
   city.value = store.getters.getCurrentCityId
 })
 
-function cleanPhoneNumber(phone) {
-  return phone.replace(/\D/g, '')
-}
-
-function isValidPhoneNumber(phone) {
-  const cleaned = cleanPhoneNumber(phone)
-  return /^7\d{10}$/.test(cleaned)
-}
-
 function validateForm() {
 
   if (!name.value) {
@@ -36,10 +27,11 @@ function validateForm() {
     formErrors.name = ''
   }
 
+
   if (!phone.value) {
     formErrors.phone = 'Обязательное поле'
-  } else if (!isValidPhoneNumber(phone.value)) {
-    formErrors.phone = 'Введите валидный телефон'
+  } else if (!/^\d+$/.test(phone.value)) {
+    formErrors.phone = 'Только числа'
   } else {
     formErrors.phone = ''
   }
@@ -67,7 +59,7 @@ function submitForm() {
   if (validateForm()) {
     const formData = {
       name: name.value,
-      phone: '+' + cleanPhoneNumber(phone.value),
+      phone: '+' + phone.value,
       email: email.value,
       city_id: city.value
     }
@@ -75,13 +67,12 @@ function submitForm() {
     axios.post('http://hh.autodrive-agency.ru/test-tasks/front/task-7/', formData)
       .then(response => store.commit('setResult', response.data))
       .catch(error => {
-        store.commit('setResult', error)
+        store.commit('setResult', error.response.data)
       }).finally(() => {
 
-        form.value.reset()
-        store.commit('closePopup')
-        store.commit('showResult')
-
+      form.value.reset()
+      store.commit('closePopup')
+      store.commit('showResult')
 
     })
   }
@@ -108,7 +99,7 @@ function submitForm() {
 
         <div class="mb-4">
           <label class="block mb-2">Телефон:
-            <input v-model.trim="phone" class="border p-2 w-full" name="phone" placeholder="7 (111) 111-11-11" />
+            <input v-model.trim="phone" class="border p-2 w-full" name="phone" placeholder="79999999999" />
           </label>
           <span class="text-red-500">{{ formErrors.phone }}</span>
         </div>
