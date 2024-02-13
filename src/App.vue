@@ -1,13 +1,11 @@
 <script setup>
 
-import ThePopup from '@/components/ThePopup.vue';
-import store from '@/store/index.js';
+import store from '@/store/index.js'
 import ButtonPopupShow from '@/components/ButtonPopupShow.vue'
-
-
+import PopupForm from '@/components/PopupForm.vue'
 
 function showPopup() {
-  store.commit('showPopup');
+  store.commit('showPopup')
 }
 </script>
 
@@ -19,10 +17,10 @@ function showPopup() {
     </header>
 
     <div class="mt-8">
-      <ButtonPopupShow color="blue">Button 1</ButtonPopupShow>
-      <ButtonPopupShow color="green" class="ml-4">Button 2</ButtonPopupShow>
+      <ButtonPopupShow color="blue" cityId="1">Заказать в Москву</ButtonPopupShow>
+      <ButtonPopupShow class="ml-4" color="green" cityId="2">Заказать в Санкт-Петербург</ButtonPopupShow>
 
     </div>
-    <ThePopup v-if="store.getters.getPopupVisibility" />
+    <PopupForm v-if="store.getters.getPopupVisibility" />
   </div>
 </template>

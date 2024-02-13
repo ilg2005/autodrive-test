@@ -1,28 +1,26 @@
 <script setup>
 import store from '@/store/index.js'
 
-defineProps({
+const props = defineProps({
   color: {
     type: String,
-    /*default: 'blue'*/
+  },
+  cityId: {
+    type: String
   }
 })
+
+function showPopup () {
+  store.commit('setCurrentCityId', props.cityId);
+  store.commit('showPopup');
+}
 </script>
 
 <template>
-  <button :class="color"
-          class="px-6 py-3 text-white  rounded-md  focus:outline-none"
-          @click="store.commit('showPopup')">
+  <button :class="props.color"
+          class="btn"
+          @click="showPopup">
     <slot></slot>
   </button>
 </template>
 
-<style scoped>
-.blue {
-  @apply bg-blue-500 hover:bg-blue-600 active:bg-blue-700
-}
-
-.green {
-  @apply bg-green-500 hover:bg-green-600 active:bg-green-700
-}
-</style>
