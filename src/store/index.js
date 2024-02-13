@@ -3,6 +3,8 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     isPopupVisible: false,
+    isFormSubmitted: false,
+    result: '',
     currentCityId: '',
     cities: [
       {
@@ -25,15 +27,23 @@ export default createStore({
     },
     closePopup(state) {
       state.isPopupVisible = false
+      state.isFormSubmitted = false
     },
     setCurrentCityId(state, payload) {
       state.currentCityId = payload
+    },
+    setResult(state, payload) {
+      state.result = payload
+    },
+    showResult(state) {
+      state.isFormSubmitted = true
     }
   },
   actions: {},
   getters: {
     getPopupVisibility: state => state.isPopupVisible,
     getCities: state => state.cities,
-    getCurrentCityId: state => state.currentCityId
+    getCurrentCityId: state => state.currentCityId,
+    getResult: state => state.result
   }
 })

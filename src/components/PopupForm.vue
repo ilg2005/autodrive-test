@@ -73,12 +73,14 @@ function submitForm() {
     }
 
     axios.post('http://hh.autodrive-agency.ru/test-tasks/front/task-7/', formData)
-      .then(response => console.log(response.data))
+      .then(response => store.commit('setResult', response.data))
       .catch(error => {
-        console.error('There was an error!', error)
+        store.commit('setResult', error)
       }).finally(() => {
 
         form.value.reset()
+        store.commit('closePopup')
+        store.commit('showResult')
 
 
     })

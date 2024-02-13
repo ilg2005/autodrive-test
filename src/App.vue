@@ -3,6 +3,7 @@
 import store from '@/store/index.js'
 import ButtonPopupShow from '@/components/ButtonPopupShow.vue'
 import PopupForm from '@/components/PopupForm.vue'
+import PopupResult from '@/components/PopupResult.vue'
 
 function showPopup() {
   store.commit('showPopup')
@@ -22,5 +23,6 @@ function showPopup() {
 
     </div>
     <PopupForm v-if="store.getters.getPopupVisibility" />
+    <PopupResult v-if="store.state.isFormSubmitted"/>
   </div>
 </template>
