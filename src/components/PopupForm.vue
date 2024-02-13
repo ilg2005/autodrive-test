@@ -2,9 +2,10 @@
 import { onBeforeMount, reactive, ref } from 'vue'
 import ButtonPopupClose from '@/components/ButtonPopupClose.vue'
 import store from '@/store/index.js'
+import axios from 'axios'
 
 const title = 'Заполните форму'
-const form = ref(null);
+const form = ref(null)
 const name = ref('')
 const phone = ref('')
 const email = ref('')
@@ -14,16 +15,17 @@ const cities = ref([])
 let formErrors = reactive({})
 
 onBeforeMount(() => {
-  cities.value = store.getters.getCities;
-  city.value = store.getters.getCurrentCityId;
+  cities.value = store.getters.getCities
+  city.value = store.getters.getCurrentCityId
 })
 
-function cleanPhoneNumber (phone) {
-  return phone.replace(/\D/g, '');
+function cleanPhoneNumber(phone) {
+  return phone.replace(/\D/g, '')
 }
+
 function isValidPhoneNumber(phone) {
-  const cleaned = cleanPhoneNumber(phone);
-  return /^\d+$/.test(cleaned);
+  const cleaned = cleanPhoneNumber(phone)
+  return /^7\d{10}$/.test(cleaned)
 }
 
 function validateForm() {
@@ -31,7 +33,7 @@ function validateForm() {
   if (!name.value) {
     formErrors.name = 'Обязательное поле'
   } else {
-    formErrors.name = '';
+    formErrors.name = ''
   }
 
   if (!phone.value) {
@@ -39,36 +41,48 @@ function validateForm() {
   } else if (!isValidPhoneNumber(phone.value)) {
     formErrors.phone = 'Введите валидный телефон'
   } else {
-    formErrors.phone = '';
+    formErrors.phone = ''
   }
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
   if (!email.value) {
-    formErrors.email = 'Обязательное поле';
+    formErrors.email = 'Обязательное поле'
   } else if (!emailRegex.test(email.value)) {
-    formErrors.email = 'Введите действительный email';
+    formErrors.email = 'Введите действительный email'
   } else {
-    formErrors.email = '';
+    formErrors.email = ''
   }
 
   if (!city.value) {
     formErrors.city = 'Обязательное поле'
   } else {
-    formErrors.city = '';
+    formErrors.city = ''
   }
 
-  return Object.keys(formErrors).every(key => !formErrors[key]);
+  return Object.keys(formErrors).every(key => !formErrors[key])
 }
+
 function submitForm() {
 
-   if (validateForm()) {
-     console.log('name:', name.value);
-     console.log('phone:', phone.value);
-     console.log('name:', email.value);
-     console.log('name:', city.value);
-   }
+  if (validateForm()) {
+    const formData = {
+      name: name.value,
+      phone: '+' + cleanPhoneNumber(phone.value),
+      email: email.value,
+      city_id: city.value
+    }
 
-  // Handle form submission logic here
+    axios.post('http://hh.autodrive-agency.ru/test-tasks/front/task-7/', formData)
+      .then(response => console.log(response.data))
+      .catch(error => {
+        console.error('There was an error!', error)
+      }).finally(() => {
+
+        form.value.reset()
+
+
+    })
+  }
 }
 
 </script>
@@ -82,7 +96,7 @@ function submitForm() {
         <ButtonPopupClose />
       </div>
 
-      <form ref="form" @submit.prevent="submitForm" novalidate>
+      <form ref="form" novalidate @submit.prevent="submitForm">
         <div class="mb-4">
           <label class="block mb-2">Имя:
             <input v-model.trim="name" class="border p-2 w-full" name="name" type="text" />
@@ -92,7 +106,7 @@ function submitForm() {
 
         <div class="mb-4">
           <label class="block mb-2">Телефон:
-            <input v-model.trim="phone" class="border p-2 w-full" name="phone" type="tel" />
+            <input v-model.trim="phone" class="border p-2 w-full" name="phone" placeholder="7 (111) 111-11-11" />
           </label>
           <span class="text-red-500">{{ formErrors.phone }}</span>
         </div>

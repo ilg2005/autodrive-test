@@ -7,15 +7,15 @@ export default createStore({
     cities: [
       {
         id: 1,
-        name: "Москва"
+        name: 'Москва'
       },
       {
         id: 2,
-        name: "Санкт-Петербург"
+        name: 'Санкт-Петербург'
       },
       {
         id: 3,
-        name: "Казань"
+        name: 'Казань'
       }
     ]
   },
@@ -27,7 +27,7 @@ export default createStore({
       state.isPopupVisible = false
     },
     setCurrentCityId(state, payload) {
-      state.currentCityId = payload;
+      state.currentCityId = payload
     }
   },
   actions: {},
@@ -36,4 +36,4 @@ export default createStore({
     getCities: state => state.cities,
     getCurrentCityId: state => state.currentCityId
   }
-});
+})
