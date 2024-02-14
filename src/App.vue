@@ -6,9 +6,6 @@ import PopupForm from '@/components/popup/PopupForm.vue'
 import PopupResult from '@/components/popup/PopupResult.vue'
 import PopupTemplate from '@/components/popup/PopupTemplate.vue'
 
-function showPopup() {
-  store.commit('showPopup')
-}
 </script>
 
 <template>
