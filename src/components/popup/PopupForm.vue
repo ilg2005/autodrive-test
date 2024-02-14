@@ -1,10 +1,8 @@
 <script setup>
 import { onBeforeMount, reactive, ref } from 'vue'
-import ButtonPopupClose from '@/components/popup/PopupButtonClose.vue'
 import store from '@/store/index.js'
 import axios from 'axios'
 
-const title = 'Заполните форму'
 const form = ref(null)
 const name = ref('')
 const phone = ref('')
@@ -81,50 +79,40 @@ function submitForm() {
 </script>
 
 <template>
-  <div class="fixed inset-0 flex items-center justify-center bg-opacity-75 bg-gray-900">
-    <div class="bg-white rounded-lg p-8">
-      <div class="flex justify-between mb-4">
-
-        <h2 class="text-xl font-bold">{{ title }}</h2>
-        <ButtonPopupClose />
-      </div>
-
-      <form ref="form" novalidate @submit.prevent="submitForm">
-        <div class="mb-4">
-          <label class="block mb-2">Имя:
-            <input v-model.trim="name" class="border p-2 w-full" name="name" type="text" />
-          </label>
-          <span class="text-red-500">{{ formErrors.name }}</span>
-        </div>
-
-        <div class="mb-4">
-          <label class="block mb-2">Телефон:
-            <input v-model.trim="phone" class="border p-2 w-full" name="phone" placeholder="79999999999" />
-          </label>
-          <span class="text-red-500">{{ formErrors.phone }}</span>
-        </div>
-
-        <div class="mb-4">
-          <label class="block mb-2">Email:
-            <input v-model.trim="email" class="border p-2 w-full" name="email" type="email" />
-          </label>
-          <span class="text-red-500">{{ formErrors.email }}</span>
-        </div>
-
-        <div class="mb-4">
-          <label class="block mb-2">Город:
-            <select v-model.trim="city" class="border p-2 w-full" name="city_id">
-              <option v-for="cityOption in cities" :key="cityOption" :value="cityOption.id">{{ cityOption.name }}
-              </option>
-            </select>
-          </label>
-          <span class="text-red-500">{{ formErrors.city }}</span>
-        </div>
-
-        <button class="btn blue mt-6 w-full rounded" type="submit">Отправить</button>
-      </form>
+  <form ref="form" novalidate @submit.prevent="submitForm">
+    <div class="mb-4">
+      <label class="block mb-2">Имя:
+        <input v-model.trim="name" class="border p-2 w-full" name="name" type="text" />
+      </label>
+      <span class="text-red-500">{{ formErrors.name }}</span>
     </div>
-  </div>
+
+    <div class="mb-4">
+      <label class="block mb-2">Телефон:
+        <input v-model.trim="phone" class="border p-2 w-full" name="phone" placeholder="79999999999" />
+      </label>
+      <span class="text-red-500">{{ formErrors.phone }}</span>
+    </div>
+
+    <div class="mb-4">
+      <label class="block mb-2">Email:
+        <input v-model.trim="email" class="border p-2 w-full" name="email" type="email" />
+      </label>
+      <span class="text-red-500">{{ formErrors.email }}</span>
+    </div>
+
+    <div class="mb-4">
+      <label class="block mb-2">Город:
+        <select v-model.trim="city" class="border p-2 w-full" name="city_id">
+          <option v-for="cityOption in cities" :key="cityOption" :value="cityOption.id">{{ cityOption.name }}
+          </option>
+        </select>
+      </label>
+      <span class="text-red-500">{{ formErrors.city }}</span>
+    </div>
+
+    <button class="btn blue mt-6 w-full rounded" type="submit">Отправить</button>
+  </form>
 </template>
 
 

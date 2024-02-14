@@ -4,6 +4,7 @@ import store from '@/store/index.js'
 import ButtonPopupShow from '@/components/ButtonShowPopup.vue'
 import PopupForm from '@/components/popup/PopupForm.vue'
 import PopupResult from '@/components/popup/PopupResult.vue'
+import PopupTemplate from '@/components/popup/PopupTemplate.vue'
 
 function showPopup() {
   store.commit('showPopup')
@@ -18,11 +19,18 @@ function showPopup() {
     </header>
 
     <div class="mt-8">
-      <ButtonPopupShow color="blue" cityId="1">Заказать в Москву</ButtonPopupShow>
-      <ButtonPopupShow class="ml-4" color="green" cityId="2">Заказать в Санкт-Петербург</ButtonPopupShow>
+      <ButtonPopupShow cityId="1" color="blue">Заказать в Москву</ButtonPopupShow>
+      <ButtonPopupShow cityId="2" class="ml-4" color="green">Заказать в Санкт-Петербург</ButtonPopupShow>
 
     </div>
-    <PopupForm v-if="store.getters.getPopupVisibility" />
-    <PopupResult v-if="store.state.isFormSubmitted"/>
+
+    <PopupTemplate v-if="store.getters.getPopupVisibility" title="Заполните форму">
+      <PopupForm />
+    </PopupTemplate>
+
+    <PopupTemplate v-if="store.state.isFormSubmitted" title="Результат:">
+      <PopupResult />
+    </PopupTemplate>
+
   </div>
 </template>
