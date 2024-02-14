@@ -93,7 +93,7 @@ function submitForm() {
 
     <div class="mb-4">
       <label class="block mb-2">Телефон:
-        <input id="phone" v-maska v-model.trim="phone" class="border p-2 w-full" data-maska="['+# (###) ###-##-##']"
+        <input id="phone" v-maska v-model.trim="phone" class="border p-2 w-full" data-maska="['+7 (###) ###-##-##']"
                name="phone"
                type="text" />
       </label>
