@@ -32,8 +32,8 @@ function validateForm() {
 
   if (!phone.value) {
     formErrors.phone = 'Обязательное поле'
-  } else if (!/^\d{5,11}$/.test(cleanPhoneNumber(phone.value))) {
-    formErrors.phone = 'От 5 до 11 цифр'
+  } else if (!/^\d{11}$/.test(cleanPhoneNumber(phone.value))) {
+    formErrors.phone = 'Введите 11 цифр'
   } else {
     formErrors.phone = ''
   }
