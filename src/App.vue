@@ -1,9 +1,9 @@
 <script setup>
 
 import store from '@/store/index.js'
-import ButtonPopupShow from '@/components/ButtonPopupShow.vue'
-import PopupForm from '@/components/PopupForm.vue'
-import PopupResult from '@/components/PopupResult.vue'
+import ButtonPopupShow from '@/components/ButtonShowPopup.vue'
+import PopupForm from '@/components/popup/PopupForm.vue'
+import PopupResult from '@/components/popup/PopupResult.vue'
 
 function showPopup() {
   store.commit('showPopup')

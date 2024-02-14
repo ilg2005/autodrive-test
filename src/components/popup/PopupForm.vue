@@ -1,6 +1,6 @@
 <script setup>
 import { onBeforeMount, reactive, ref } from 'vue'
-import ButtonPopupClose from '@/components/ButtonPopupClose.vue'
+import ButtonPopupClose from '@/components/popup/PopupButtonClose.vue'
 import store from '@/store/index.js'
 import axios from 'axios'
 

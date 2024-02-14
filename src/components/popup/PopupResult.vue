@@ -1,6 +1,6 @@
 <script setup>
 import store from '@/store/index.js'
-import ButtonPopupClose from '@/components/ButtonPopupClose.vue'
+import ButtonPopupClose from '@/components/popup/PopupButtonClose.vue'
 </script>
 
 <template>
