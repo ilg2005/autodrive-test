@@ -2,6 +2,7 @@
 import { onBeforeMount, reactive, ref } from 'vue'
 import store from '@/store/index.js'
 import axios from 'axios'
+import { vMaska } from 'maska'
 
 const form = ref(null)
 const name = ref('')
@@ -17,6 +18,10 @@ onBeforeMount(() => {
   city.value = store.getters.getCurrentCityId
 })
 
+function cleanPhoneNumber(phone) {
+  return phone.replace(/\D/g, '')
+}
+
 function validateForm() {
 
   if (!name.value) {
@@ -27,8 +32,8 @@ function validateForm() {
 
   if (!phone.value) {
     formErrors.phone = 'Обязательное поле'
-  } else if (!/^\d+$/.test(phone.value)) {
-    formErrors.phone = 'Только числа'
+  } else if (!/^\d{5,11}$/.test(cleanPhoneNumber(phone.value))) {
+    formErrors.phone = 'От 5 до 11 цифр'
   } else {
     formErrors.phone = ''
   }
@@ -56,7 +61,7 @@ function submitForm() {
   if (validateForm()) {
     const formData = {
       name: name.value,
-      phone: '+' + phone.value,
+      phone: '+' + cleanPhoneNumber(phone.value),
       email: email.value,
       city_id: city.value
     }
@@ -88,7 +93,9 @@ function submitForm() {
 
     <div class="mb-4">
       <label class="block mb-2">Телефон:
-        <input v-model.trim="phone" class="border p-2 w-full" name="phone" placeholder="79999999999" />
+        <input id="phone" v-maska v-model.trim="phone" class="border p-2 w-full" data-maska="['+# (###) ###-##-##']"
+               name="phone"
+               type="text" />
       </label>
       <span class="text-red-500">{{ formErrors.phone }}</span>
     </div>
