@@ -1,7 +1,7 @@
 <script setup>
 
 import store from '@/store/index.js'
-import ButtonPopupShow from '@/components/ButtonShowPopup.vue'
+import ButtonShowPopup from '@/components/ButtonShowPopup.vue'
 import PopupForm from '@/components/popup/PopupForm.vue'
 import PopupResult from '@/components/popup/PopupResult.vue'
 import PopupTemplate from '@/components/popup/PopupTemplate.vue'
@@ -19,8 +19,8 @@ function showPopup() {
     </header>
 
     <div class="mt-8">
-      <ButtonPopupShow cityId="1" color="blue">Заказать в Москву</ButtonPopupShow>
-      <ButtonPopupShow cityId="2" class="ml-4" color="green">Заказать в Санкт-Петербург</ButtonPopupShow>
+      <ButtonShowPopup cityId="1" color="blue">Заказать в Москву</ButtonShowPopup>
+      <ButtonShowPopup cityId="2" class="ml-4" color="green">Заказать в Санкт-Петербург</ButtonShowPopup>
 
     </div>
 
