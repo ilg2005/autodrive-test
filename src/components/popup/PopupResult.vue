@@ -5,7 +5,3 @@ import store from '@/store/index.js'
 <template>
   <div v-html="store.getters.getResult"></div>
 </template>
-
-<style scoped>
-
-</style>

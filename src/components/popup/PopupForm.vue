@@ -25,7 +25,6 @@ function validateForm() {
     formErrors.name = ''
   }
 
-
   if (!phone.value) {
     formErrors.phone = 'Обязательное поле'
   } else if (!/^\d+$/.test(phone.value)) {

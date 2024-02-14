@@ -39,7 +39,6 @@ export default createStore({
       state.isFormSubmitted = true
     }
   },
-  actions: {},
   getters: {
     getPopupVisibility: state => state.isPopupVisible,
     getCities: state => state.cities,

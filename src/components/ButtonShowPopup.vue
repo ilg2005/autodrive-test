@@ -3,16 +3,16 @@ import store from '@/store/index.js'
 
 const props = defineProps({
   color: {
-    type: String,
+    type: String
   },
   cityId: {
     type: String
   }
 })
 
-function showPopup () {
-  store.commit('setCurrentCityId', props.cityId);
-  store.commit('showPopup');
+function showPopup() {
+  store.commit('setCurrentCityId', props.cityId)
+  store.commit('showPopup')
 }
 </script>
 
